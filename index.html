@@ -326,6 +326,150 @@
     color: var(--ink-soft);
   }
 
+  /* ---------- POUR DEMO ---------- */
+
+  .pour-demo {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 40px 24px 32px;
+  }
+
+  .cup-stack {
+    position: relative;
+    width: 140px;
+    height: 230px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .cup-stack::after {
+    content: "";
+    position: absolute;
+    left: -60px;
+    right: -60px;
+    bottom: 0;
+    height: 2px;
+    background: var(--line);
+  }
+
+  .cup {
+    position: relative;
+    width: 120px;
+    height: 130px;
+    border: 2px solid var(--ink);
+    background: rgba(255, 255, 255, 0.3);
+    clip-path: polygon(14% 0, 86% 0, 100% 100%, 0% 100%);
+    overflow: hidden;
+  }
+
+  .liquid {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0%;
+    background: rgba(199, 158, 61, 0.35);
+    transition: height 2.6s cubic-bezier(.22,.7,.2,1), background-color 1.2s ease;
+  }
+
+  .foam-cap {
+    position: absolute;
+    bottom: 118px;
+    left: 50%;
+    width: 132px;
+    height: 0;
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: bottom center;
+    background: var(--foam-tan);
+    border: 2px solid var(--ink);
+    border-radius: 50% 50% 42% 42% / 60% 60% 25% 25%;
+    transition: height 3s cubic-bezier(.22,.7,.2,1), transform 3s cubic-bezier(.22,.7,.2,1),
+                opacity 0.4s ease, background-color 1.4s ease, border-radius 2.4s ease;
+  }
+
+  [data-stage="mixing"] .liquid,
+  [data-stage="cream"] .liquid,
+  [data-stage="rising"] .liquid,
+  [data-stage="tackfree"] .liquid,
+  [data-stage="cured"] .liquid { height: 55%; }
+
+  [data-stage="cream"] .liquid,
+  [data-stage="rising"] .liquid,
+  [data-stage="tackfree"] .liquid,
+  [data-stage="cured"] .liquid { background: rgba(234, 200, 115, 0.92); }
+
+  [data-stage="rising"] .foam-cap,
+  [data-stage="tackfree"] .foam-cap,
+  [data-stage="cured"] .foam-cap {
+    height: 100px;
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1);
+  }
+
+  [data-stage="tackfree"] .foam-cap {
+    border-radius: 46% 46% 46% 46% / 50% 50% 30% 30%;
+    filter: saturate(0.92);
+  }
+
+  [data-stage="cured"] .foam-cap {
+    background: var(--foam-tan-deep);
+    transform: translateX(-50%) scaleY(0.96);
+  }
+
+  .pour-readout {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .pour-stage-name {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .pour-stage-time {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--hazard);
+  }
+
+  .pour-btn {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    background: var(--hazard);
+    color: var(--paper);
+    border: none;
+    border-radius: 999px;
+    padding: 12px 30px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, opacity 0.2s ease, transform 0.15s ease;
+  }
+
+  .pour-btn:hover:not(:disabled) { background: #BE3D18; }
+  .pour-btn:active:not(:disabled) { transform: scale(0.97); }
+  .pour-btn:disabled { opacity: 0.55; cursor: default; }
+
+  .pour-note {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    text-align: center;
+    max-width: 44ch;
+    margin: 0;
+  }
+
   /* ---------- CELL STRUCTURE ---------- */
 
   .cells {
@@ -531,7 +675,29 @@
 
 <section class="block">
   <div class="wrap">
-    <p class="kicker">04 — Cell Structure</p>
+    <p class="kicker">04 — Run It Yourself</p>
+    <h2>Pour the reaction into a cup</h2>
+    <p class="lede">Same five stages as the timeline above, compressed into about ten seconds. Press pour and watch a clear liquid turn into a solid full of gas.</p>
+    <div class="pour-demo" data-stage="idle">
+      <div class="cup-stack">
+        <div class="cup">
+          <div class="liquid"></div>
+        </div>
+        <div class="foam-cap"></div>
+      </div>
+      <div class="pour-readout" aria-live="polite">
+        <span class="pour-stage-name">Ready to pour</span>
+        <span class="pour-stage-time">—</span>
+      </div>
+      <button type="button" class="pour-btn">Pour the reaction</button>
+      <p class="pour-note">Real foam takes minutes to rise and days to fully cure — this demo is sped up for illustration.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <p class="kicker">05 — Cell Structure</p>
     <h2>Whether the walls between bubbles survive decides everything</h2>
     <p class="lede">As CO₂ cells expand and press against each other, their thin polymer walls either rupture or hold. That single mechanical outcome splits all polyurethane foam into two families.</p>
     <div class="cells">
@@ -561,7 +727,7 @@
 
 <section class="block">
   <div class="wrap">
-    <p class="kicker">05 — Where It Ends Up</p>
+    <p class="kicker">06 — Where It Ends Up</p>
     <h2>One chemistry, five very different products</h2>
     <p class="lede">Formulation — polyol functionality, isocyanate type, catalyst ratio, blowing agent — determines which of these a given batch becomes.</p>
     <div class="apps">
@@ -609,6 +775,37 @@
   } else {
     document.querySelectorAll('.stage').forEach((s) => s.classList.add('is-visible'));
   }
+
+  const pourDemo = document.querySelector('.pour-demo');
+  const pourBtn = document.querySelector('.pour-btn');
+  const stageNameEl = document.querySelector('.pour-stage-name');
+  const stageTimeEl = document.querySelector('.pour-stage-time');
+
+  const POUR_STAGES = [
+    { stage: 'mixing', name: 'Mixing', time: '0 s', delay: 0 },
+    { stage: 'cream', name: 'Cream time', time: '~8–15 s real time', delay: 300 },
+    { stage: 'rising', name: 'Rise time', time: '~60–120 s real time', delay: 1300 },
+    { stage: 'tackfree', name: 'Tack-free time', time: '~120–180 s real time', delay: 4600 },
+    { stage: 'cured', name: 'Cured', time: 'hours – days real time', delay: 6400 },
+  ];
+  const POUR_TOTAL_MS = 8200;
+
+  function setPourStage(s) {
+    pourDemo.dataset.stage = s.stage;
+    stageNameEl.textContent = s.name;
+    stageTimeEl.textContent = s.time;
+  }
+
+  pourBtn.addEventListener('click', () => {
+    pourBtn.disabled = true;
+    pourBtn.textContent = 'Pouring…';
+    pourDemo.dataset.stage = 'idle';
+    POUR_STAGES.forEach((s) => setTimeout(() => setPourStage(s), s.delay));
+    setTimeout(() => {
+      pourBtn.disabled = false;
+      pourBtn.textContent = 'Pour again';
+    }, POUR_TOTAL_MS);
+  });
 </script>
 
 </body>
