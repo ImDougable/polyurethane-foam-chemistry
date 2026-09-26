@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Chemistry of Polyurethane Foam</title>
+<meta name="description" content="How two liquids become a solid full of gas — the reactions, catalysts, and timeline behind polyurethane foam.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --substrate: #E7E2D4;
+    --substrate-2: #DCD6C4;
+    --foam-tan: #EAC873;
+    --foam-tan-deep: #D9AE49;
+    --ink: #1C1710;
+    --ink-soft: #4A4234;
+    --hazard: #D6491F;
+    --cell-blue: #3C5A73;
+    --paper: #F7F3E8;
+    --line: rgba(28, 23, 16, 0.14);
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--substrate);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--hazard); }
+  a:focus-visible, button:focus-visible, .bubble:focus-visible {
+    outline: 3px solid var(--cell-blue);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- HERO ---------- */
+
+  .hero {
+    padding: 96px 0 72px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -120px;
+    right: -140px;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--foam-tan), transparent 70%);
+    opacity: 0.55;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cell-blue);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 26px;
+    height: 2px;
+    background: var(--hazard);
+    display: inline-block;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 6vw, 4.1rem);
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+    margin: 0 0 28px;
+    max-width: 15ch;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-sub {
+    max-width: 56ch;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    margin: 0 0 36px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .equation-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px 26px;
+    font-family: var(--mono);
+    font-size: 1.02rem;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 1px 0 rgba(28,23,16,0.05);
+  }
+
+  .equation-card .arrow { color: var(--hazard); font-weight: 500; }
+  .equation-card .tag {
+    font-family: var(--body);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: block;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  /* ---------- SECTIONS ---------- */
+
+  section.block {
+    padding: 64px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .kicker {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--cell-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 10px;
+  }
+
+  h2 {
+    font-family: var(--display);
+    font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+  }
+
+  .lede {
+    max-width: 62ch;
+    color: var(--ink-soft);
+    margin: 0 0 40px;
+    font-size: 1.05rem;
+  }
+
+  /* ---------- TWO REACTIONS ---------- */
+
+  .reactions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .reaction-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 26px 24px;
+  }
+
+  .reaction-card h3 {
+    font-family: var(--display);
+    font-size: 1.15rem;
+    margin: 0 0 6px;
+  }
+
+  .reaction-card .role {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--hazard);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 16px;
+  }
+
+  .reaction-card .eqn {
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    background: var(--substrate);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 0 0 14px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .reaction-card p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+  }
+
+  .reaction-card.blowing .eqn { border-left: 3px solid var(--hazard); }
+  .reaction-card.gelling .eqn { border-left: 3px solid var(--cell-blue); }
+
+  /* ---------- CATALYST TABLE ---------- */
+
+  .tuning-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .tuning-card {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px;
+  }
+
+  .tuning-card h4 {
+    font-family: var(--display);
+    font-size: 1rem;
+    margin: 0 0 4px;
+  }
+
+  .tuning-card .sub {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+    display: block;
+  }
+
+  .tuning-card p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; }
+
+  /* ---------- RISE TIMELINE (signature) ---------- */
+
+  .timeline {
+    position: relative;
+    padding-left: 34px;
+    margin-top: 24px;
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--foam-tan-deep), var(--cell-blue));
+  }
+
+  .stage {
+    position: relative;
+    padding-bottom: 40px;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .stage.is-visible { opacity: 1; transform: translateY(0); }
+
+  .stage:last-child { padding-bottom: 0; }
+
+  .bubble {
+    position: absolute;
+    left: -34px;
+    top: 2px;
+    border-radius: 50%;
+    background: var(--foam-tan);
+    border: 2px solid var(--ink);
+  }
+
+  .stage:nth-child(1) .bubble { width: 14px; height: 14px; left: -32px; }
+  .stage:nth-child(2) .bubble { width: 18px; height: 18px; left: -34px; }
+  .stage:nth-child(3) .bubble { width: 22px; height: 22px; left: -36px; }
+  .stage:nth-child(4) .bubble { width: 19px; height: 19px; left: -34px; background: #C9C2AC; }
+  .stage:nth-child(5) .bubble { width: 15px; height: 15px; left: -32px; background: var(--cell-blue); border-color: var(--cell-blue); }
+
+  .stage-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+
+  .stage-name {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+
+  .stage-time {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--hazard);
+  }
+
+  .stage p {
+    margin: 0;
+    max-width: 58ch;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- CELL STRUCTURE ---------- */
+
+  .cells {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .cell-card {
+    border-radius: 20px;
+    padding: 28px 24px;
+    color: var(--paper);
+  }
+
+  .cell-card.open { background: var(--foam-tan-deep); color: var(--ink); }
+  .cell-card.closed { background: var(--cell-blue); }
+
+  .cell-card h3 { font-family: var(--display); font-size: 1.2rem; margin: 0 0 10px; }
+  .cell-card p { margin: 0 0 14px; opacity: 0.92; font-size: 0.95rem; }
+  .cell-card ul { margin: 0; padding-left: 18px; font-size: 0.92rem; }
+  .cell-card li { margin-bottom: 4px; }
+
+  /* ---------- APPLICATIONS ---------- */
+
+  .apps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .app-row {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+  }
+
+  .app-row:nth-child(2n) { border-right: none; }
+
+  .app-row .form {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--cell-blue);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .app-row .use { font-size: 0.95rem; }
+
+  /* ---------- FOOTER ---------- */
+
+  footer {
+    padding: 48px 0 64px;
+    border-top: 1px solid var(--line);
+  }
+
+  .hazard-note {
+    background: var(--paper);
+    border-left: 3px solid var(--hazard);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    max-width: 62ch;
+  }
+
+  .hazard-note strong { color: var(--ink); }
+
+  .colophon {
+    margin-top: 28px;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 720px) {
+    .reactions, .tuning-grid, .cells { grid-template-columns: 1fr; }
+    .apps { grid-template-columns: 1fr; }
+    .app-row { border-right: none !important; }
+    .hero { padding: 64px 0 48px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Foam Chemistry, Explained From The Molecule Up</p>
+    <h1>Two liquids meet. Ninety seconds later, it's a solid full of gas.</h1>
+    <p class="hero-sub">Polyurethane foam isn't poured or carved — it's grown. A polyol and an isocyanate are mixed, and two reactions race each other: one builds the polymer, the other inflates it. What survives the race is the foam in your mattress, your seat cushion, or your attic insulation.</p>
+    <div class="equation-card">
+      <span class="tag">The linkage that gives polyurethane its name</span>
+      R–N=C=O <span class="arrow">+</span> R'–OH <span class="arrow">→</span> R–NH–C(=O)–O–R'
+    </div>
+  </div>
+</header>
+
+<section class="block">
+  <div class="wrap">
+    <p class="kicker">01 — The Two Reactions</p>
+    <h2>Gelling builds the skeleton. Blowing inflates it.</h2>
+    <p class="lede">Every polyurethane foam formulation runs two competing reactions at once. Neither alone makes foam — one without the other gives you a solid brick or a puddle of gas-filled liquid.</p>
+    <div class="reactions">
+      <div class="reaction-card gelling">
+        <p class="role">Gelling reaction</p>
+        <h3>Polyol + isocyanate → urethane</h3>
+        <div class="eqn">R–N=C=O + R'–OH → R–NH–CO–O–R'</div>
+        <p>The isocyanate's –N=C=O group attacks the polyol's hydroxyl, forming the urethane (carbamate) linkage. Chains stitch together into a polymer network — this is what gives the foam its structure and load-bearing strength.</p>
+      </div>
+      <div class="reaction-card blowing">
+        <p class="role">Blowing reaction</p>
+        <h3>Water + isocyanate → CO₂ + urea</h3>
+        <div class="eqn">R–N=C=O + H₂O → R–NH₂ + CO₂↑<br>R–NH₂ + R'–N=C=O → R–NH–CO–NH–R'</div>
+        <p>Water reacts with isocyanate to form an unstable carbamic acid, which decomposes into an amine and CO₂ gas. That gas is the bubble. The amine goes on to react with more isocyanate, adding urea linkages into the polymer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <p class="kicker">02 — What Tunes The Race</p>
+    <h2>Catalysts decide which reaction wins, and when.</h2>
+    <p class="lede">Left alone, the two reactions run at whatever rate the raw chemistry allows — usually too slow and too uneven to make usable foam. Catalysts and surfactants are how a formulator steers the outcome.</p>
+    <div class="tuning-grid">
+      <div class="tuning-card">
+        <h4>Amine catalysts</h4>
+        <span class="sub">e.g. triethylenediamine — accelerate blowing</span>
+        <p>Tertiary amines preferentially speed up the water–isocyanate reaction, generating CO₂ earlier and faster. Too much, and the foam inflates before the polymer network is strong enough to hold the gas — it collapses.</p>
+      </div>
+      <div class="tuning-card">
+        <h4>Organotin catalysts</h4>
+        <span class="sub">e.g. stannous octoate — accelerate gelling</span>
+        <p>Tin catalysts speed up the polyol–isocyanate reaction instead, building the polymer network faster. Too much relative to blowing, and the foam sets before it can fully rise — it stays dense and small.</p>
+      </div>
+      <div class="tuning-card">
+        <h4>Silicone surfactants</h4>
+        <span class="sub">polyether-modified siloxanes</span>
+        <p>These lower surface tension at the gas–liquid interface, so CO₂ bubbles nucleate small and evenly instead of merging into large voids. They stabilize the cell walls just long enough for the polymer to set around them.</p>
+      </div>
+      <div class="tuning-card">
+        <h4>The balance point</h4>
+        <span class="sub">gelling rate vs. blowing rate</span>
+        <p>Every commercial formulation is really a bet on timing: the gel reaction must catch up to the blowing reaction at almost exactly the moment the foam finishes rising — not before, not after.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <p class="kicker">03 — The Rise</p>
+    <h2>What a block of foam does in its first five minutes</h2>
+    <p class="lede">Watch a foam pour and you're watching the balance above play out in real time. These are typical stages for a water-blown flexible slabstock foam — exact timings shift with formulation, but the sequence doesn't.</p>
+    <div class="timeline">
+      <div class="stage">
+        <div class="bubble"></div>
+        <div class="stage-head">
+          <span class="stage-name">Mixing</span>
+          <span class="stage-time">0 s</span>
+        </div>
+        <p>Polyol blend, isocyanate, catalysts, surfactant, and water are combined under high shear. The mixture is still a clear, low-viscosity liquid.</p>
+      </div>
+      <div class="stage">
+        <div class="bubble"></div>
+        <div class="stage-head">
+          <span class="stage-name">Cream time</span>
+          <span class="stage-time">~8–15 s</span>
+        </div>
+        <p>The liquid turns opaque and pale as the first CO₂ bubbles nucleate throughout the mixture — the "cream" moment gives this stage its name.</p>
+      </div>
+      <div class="stage">
+        <div class="bubble"></div>
+        <div class="stage-head">
+          <span class="stage-name">Rise time</span>
+          <span class="stage-time">~60–120 s</span>
+        </div>
+        <p>CO₂ generation peaks. The foam expands to its full volume as the exotherm from both reactions pushes the core temperature toward 130–150 °C.</p>
+      </div>
+      <div class="stage">
+        <div class="bubble"></div>
+        <div class="stage-head">
+          <span class="stage-name">Tack-free time</span>
+          <span class="stage-time">~120–180 s</span>
+        </div>
+        <p>The gelling reaction has built enough polymer network that the surface stops sticking to the touch. A skin forms over the still-curing interior.</p>
+      </div>
+      <div class="stage">
+        <div class="bubble"></div>
+        <div class="stage-head">
+          <span class="stage-name">Cure</span>
+          <span class="stage-time">hours – days</span>
+        </div>
+        <p>Crosslinking continues long after the foam looks finished. Full mechanical properties — compression set, tensile strength — develop over the following 24–72 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <p class="kicker">04 — Cell Structure</p>
+    <h2>Whether the walls between bubbles survive decides everything</h2>
+    <p class="lede">As CO₂ cells expand and press against each other, their thin polymer walls either rupture or hold. That single mechanical outcome splits all polyurethane foam into two families.</p>
+    <div class="cells">
+      <div class="cell-card open">
+        <h3>Open-cell</h3>
+        <p>Cell walls rupture during rise, leaving an interconnected, air-permeable lattice.</p>
+        <ul>
+          <li>Softer, more compressible</li>
+          <li>Breathes — air and moisture pass through</li>
+          <li>Lower density, lower R-value</li>
+          <li>Mattresses, cushions, acoustic foam</li>
+        </ul>
+      </div>
+      <div class="cell-card closed">
+        <h3>Closed-cell</h3>
+        <p>Cell walls stay intact, sealing gas inside discrete pockets.</p>
+        <ul>
+          <li>Rigid, higher compressive strength</li>
+          <li>Resists moisture and airflow</li>
+          <li>Higher density, higher R-value</li>
+          <li>Spray insulation, structural panels, buoyancy foam</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <p class="kicker">05 — Where It Ends Up</p>
+    <h2>One chemistry, five very different products</h2>
+    <p class="lede">Formulation — polyol functionality, isocyanate type, catalyst ratio, blowing agent — determines which of these a given batch becomes.</p>
+    <div class="apps">
+      <div class="app-row">
+        <span class="form">Flexible slabstock</span>
+        <span class="use">Mattress cores, furniture cushioning</span>
+      </div>
+      <div class="app-row">
+        <span class="form">Molded flexible</span>
+        <span class="use">Car seats, headrests, armrests</span>
+      </div>
+      <div class="app-row">
+        <span class="form">Rigid board &amp; spray</span>
+        <span class="use">Wall and roof insulation, refrigeration panels</span>
+      </div>
+      <div class="app-row">
+        <span class="form">Integral skin</span>
+        <span class="use">Steering wheels, shoe midsoles, armrests</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="hazard-note">
+      <strong>A note on isocyanates:</strong> MDI and TDI, the diisocyanates behind most polyurethane foam, are respiratory sensitizers. Industrial production and any DIY spray-foam work require proper ventilation, respiratory protection, and skin protection — sensitization can develop with repeated exposure even at low levels.
+    </div>
+    <p class="colophon">A single-page primer on polyurethane foam chemistry — gelling and blowing reactions, catalysis, cell structure, and cure.</p>
+  </div>
+</footer>
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const stages = document.querySelectorAll('.stage');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    stages.forEach((stage) => observer.observe(stage));
+  } else {
+    document.querySelectorAll('.stage').forEach((s) => s.classList.add('is-visible'));
+  }
+</script>
+
+</body>
+</html>
